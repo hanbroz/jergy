@@ -1,6 +1,7 @@
 package com.edw.jergy.sample.controller;
 
 import com.edw.jergy.sample.domin.Board;
+import com.edw.jergy.sample.exception.ApiException;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.GET;
@@ -32,13 +33,13 @@ public class HomeController {
     @GET
     @Path("/exception")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response throwException() throws Exception {
+    public Response throwException() throws ApiException {
         Board board = new Board();
         board.setSeq(2);
         board.setTitle("게시물 2번");
 
         if(true) {
-            throw new Exception("이런 오류가 발생");
+            throw new ApiException("게시물에서 오류가 발생합니다.");
         }
 
         return Response.ok(board).build();
